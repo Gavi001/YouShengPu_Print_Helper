@@ -176,6 +176,8 @@ const svgElements = document.querySelectorAll('#nier-scroll-view > div > div > d
 
 ## 更新日志
 
+#### v4.7 - 解决网页更新拦截脚本问题
+
 #### v4.5 - 下架曲谱解锁
 
 
