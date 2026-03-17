@@ -65,7 +65,14 @@
     // --------------------------
     function unlockSpectrum() {
         try {
-            unsafeWindow.setTimeout = function() {};
+            const originalSetTimeout = unsafeWindow.setTimeout;
+            unsafeWindow.setTimeout = function(callback, delay, ...args) {
+                // 动画（如进度条消失）通常延时很短（<2秒）
+                if (typeof delay === 'number' && delay > 2000) {
+                    return -1;
+                }
+                return originalSetTimeout(callback, delay, ...args);
+            };
             console.log('已执行 setTimeout 覆盖解锁');
         } catch (error) {
             console.error('解锁失败:', error);
@@ -1243,3 +1250,4 @@
         clearLoadingStates();
     });
 })();
+
